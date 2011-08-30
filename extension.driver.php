@@ -1,20 +1,43 @@
 <?php
 	
-	require_once(EXTENSIONS . '/support_details/class/class.browser.php');
-	require_once(EXTENSIONS . '/support_details/class/class.os.php');
-	
 	Class extension_support_details extends Extension{
+	
+		public function __construct(Array $args){
+			parent::__construct($args);
+			
+			// Include Stage
+			if(!class_exists('browser')) {
+				try {
+					if((include_once(EXTENSIONS . '/useragent_details/class/class.browser.php')) === FALSE) {
+						throw new Exception();
+					}
+				}
+				catch(Exception $e) {
+					throw new SymphonyErrorPage(__('WHAT!?!'));
+				}
+			}
+			if(!class_exists('os')) {
+				try {
+					if((include_once(EXTENSIONS . '/useragent_details/class/class.os.php')) === FALSE) {
+						throw new Exception();
+					}
+				}
+				catch(Exception $e) {
+					throw new SymphonyErrorPage(__('WHAT!?!'));
+				}
+			}
+		}
 	
 		public function about(){
 			return array(
 				'name' => 'Support Details',
 				'version' => '1.0',
-				'release-date' => '2011-08-26',
+				'release-date' => '2011-08-30',
 				'author' => array(
 				 		'name' => 'Phill Gray',
-						'email' => 'phill@randb.com.au'
+						'email' => 'pixel.ninjad@gmail.com'
 					),
-				'description' => 'Detects the users browser and OS, and outputs as params in the param pool.'
+				'description' => 'Displays a whole lot of support details on users computer. Useful for debugging with clients without sending the client off site.'
 		 		);
 		}
 		
