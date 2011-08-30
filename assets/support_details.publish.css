@@ -1,8 +1,0 @@
-.support_details input{
-	position: absolute;
-	top: 5px;
-	right: 10px;
-}
-.edit .support_details input{
-	display: none;
-}
